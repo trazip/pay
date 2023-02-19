@@ -12,11 +12,7 @@ module Pay
 
       def create_account(**options)
         defaults = {
-          type: "express",
-          capabilities: {
-            card_payments: {requested: true},
-            transfers: {requested: true}
-          }
+          type: "standard"
         }
 
         stripe_account = ::Stripe::Account.create(defaults.merge(options))
