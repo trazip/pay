@@ -2,6 +2,38 @@
 
 ### Unreleased
 
+### 6.5.0
+
+* Add new configuration option named `send_emails` which can be used to disable the sending of all current and future emails.
+  This option can be set to a boolean value or a proc/lambda that returns a boolean value. - @cjilbert504
+
+### 6.4.0
+
+* Introduce `:pay` load hook - @excid3
+  Rails no longer allows autoloading during the initialization process. The on_load hook allows you to run code after autoloading, so we can register webhook listeners once autoloading is available.
+
+  To use this, wrap your webhook subscribe calls in the `on_load(:pay)` hook:
+
+  ```ruby
+    ActiveSupport.on_load(:pay) do
+      Pay::Webhooks.delegator.subscribe "stripe.charge.succeded", ChargeSucceeded
+    end
+  ```
+
+### 6.3.4
+
+* Import Stimulus.js from dist folder on unpkg
+
+### 6.3.3
+
+* Fix `swap_and_invoice`
+* Support passing options through `swap` on Stripe
+
+### 6.3.2
+
+* [SECURITY] Fix XSS vulnerability in back parameter on Stripe payment page
+  Previously, an attacker could inject Javascript or redirect the user to any URL by changing the `back` parameter in the URL.
+  The `back` parameter is now sanitized and restricted to relative paths.
 * Remove unused attributes for `plan` and `quantity` in `app/models/pay/customer.rb`.
 * Add explicit requires for `active_support` and `action_mailer` in `lib/pay.rb`. This should provide better errors for anyone not requiring all of Rails.
 

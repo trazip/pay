@@ -44,7 +44,7 @@ Paddle.Checkout.open({
 Or with Paddle Button Checkout:
 
 ```html
-<a href="#!" class="paddle_button" data-product="12345" data-email="<%= current_user.email %>" data-passthrough="<%= Pay::Paddle.passthrough(owner: current_user) %>"
+<a href="#!" class="paddle_button" data-product="12345" data-email="<%= current_user.email %>" data-passthrough="<%= Pay::Paddle.passthrough(owner: current_user) %>">Buy now!</a>
 ```
 
 ###### Paddle Passthrough Helper
@@ -125,7 +125,7 @@ You can check if the user is on a trial by simply asking:
 #=> true or false
 ```
 
-You can also check if the user is on a trial for a specific subscritpion name or plan.
+You can also check if the user is on a trial for a specific subscription name or plan.
 
 ```ruby
 @user.payment_processor.on_trial?(name: 'default', plan: 'plan')
